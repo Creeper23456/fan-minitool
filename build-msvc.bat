@@ -21,7 +21,10 @@ if not defined VSCMD_VER (
 )
 
 if not exist "%OUT%" mkdir "%OUT%"
-cl /nologo /std:c17 /utf-8 /W4 /WX /O2 /DUNICODE /D_UNICODE /DWIN32_LEAN_AND_MEAN /D_WIN32_WINNT=0x0A00 /D_CRT_SECURE_NO_WARNINGS /wd4055 /Fe:"%OUT%\fan-minitool.exe" /Fo:"%OUT%\" "%ROOT%src\main.c" "%ROOT%src\service.c" "%ROOT%src\config.c" "%ROOT%src\controller.c" "%ROOT%src\lhm.c" "%ROOT%src\nvapi.c" "%ROOT%src\log.c" Advapi32.lib Winhttp.lib
-if errorlevel 1 exit /b %errorlevel%
+pushd "%OUT%"
+cl /nologo /std:c17 /utf-8 /W4 /WX /O2 /DUNICODE /D_UNICODE /DWIN32_LEAN_AND_MEAN /D_WIN32_WINNT=0x0A00 /D_CRT_SECURE_NO_WARNINGS /wd4055 /Fe:fan-minitool.exe "%ROOT%src\main.c" "%ROOT%src\service.c" "%ROOT%src\config.c" "%ROOT%src\controller.c" "%ROOT%src\lhm.c" "%ROOT%src\nvapi.c" "%ROOT%src\log.c" Advapi32.lib Winhttp.lib
+set "BUILD_RESULT=!errorlevel!"
+popd
+if not "!BUILD_RESULT!"=="0" exit /b !BUILD_RESULT!
 copy /Y "%ROOT%fan-minitool.ini.example" "%OUT%\fan-minitool.ini" >nul
 echo Built %OUT%\fan-minitool.exe
