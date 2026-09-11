@@ -1,16 +1,16 @@
 @echo off
-setlocal EnableExtensions
+setlocal EnableExtensions EnableDelayedExpansion
 
 set "ROOT=%~dp0"
 set "OUT=%ROOT%build"
 
 if not defined VSCMD_VER (
     set "VSWHERE=%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe"
-    if not exist "%VSWHERE%" (
+    if not exist "!VSWHERE!" (
         echo Could not find vswhere.exe. Run this script from a Visual Studio Developer Command Prompt.
         exit /b 1
     )
-    for /f "usebackq tokens=*" %%I in (`"%VSWHERE%" -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do (
+    for /f "usebackq tokens=*" %%I in (`"!VSWHERE!" -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do (
         call "%%I\Common7\Tools\VsDevCmd.bat" -arch=x64
     )
 )

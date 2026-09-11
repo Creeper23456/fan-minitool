@@ -15,6 +15,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Build with MSVC
         run: .\build-msvc.bat
+        shell: cmd
       - name: Upload executable
         uses: actions/upload-artifact@v4
         with:
@@ -22,3 +23,4 @@ jobs:
           path: |
             build/fan-minitool.exe
             build/fan-minitool.ini
+          if-no-files-found: error
