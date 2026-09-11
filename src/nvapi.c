@@ -59,9 +59,6 @@ BOOL nvapi_open(nvapi_context *context, wchar_t *error_text, size_t error_count)
 
     module = LoadLibraryExW(L"nvapi64.dll", NULL, LOAD_LIBRARY_SEARCH_SYSTEM32);
     if (module == NULL) {
-        module = LoadLibraryW(L"nvapi64.dll");
-    }
-    if (module == NULL) {
         return set_error(error_text, error_count, L"找不到 NVIDIA 驱动提供的 nvapi64.dll");
     }
     query_interface = (nvapi_query_interface_fn)GetProcAddress(module, "nvapi_QueryInterface");

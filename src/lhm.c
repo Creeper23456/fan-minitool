@@ -143,6 +143,11 @@ BOOL lhm_open(lhm_client *client, const fan_config *config)
     if (client->session == NULL) {
         return FALSE;
     }
+    if (!WinHttpSetTimeouts(client->session, 2000, 2000, 2000, 2000)) {
+        WinHttpCloseHandle(client->session);
+        client->session = NULL;
+        return FALSE;
+    }
     client->connection = WinHttpConnect(client->session, client->host, client->port, 0);
     if (client->connection == NULL) {
         WinHttpCloseHandle(client->session);
