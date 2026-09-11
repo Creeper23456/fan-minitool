@@ -1,0 +1,21 @@
+; Copy this file to fan-minitool.ini beside fan-minitool.exe.
+; Libre Hardware Monitor must be running as administrator with its
+; Remote Web Server enabled.
+
+[nvidia]
+; Physical NVIDIA GPU index reported by NVAPI.
+gpu_index=0
+
+[librehardwaremonitor]
+host=127.0.0.1
+port=8085
+; For this machine: ITE IT8665E / Fans #4 is normally control index 3.
+; Confirm the exact SensorId in http://127.0.0.1:8085/data.json.
+pwm_sensor_id=/lpc/it8665e/0/control/3
+
+[control]
+poll_interval_ms=2000
+start_temperature_c=50
+max_temperature_c=85
+; 50 C starts the fan at this PWM, then the value grows linearly to 100% at 85 C.
+start_pwm_percent=30
