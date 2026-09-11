@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 #include "nvapi.h"
 
+#include <stdlib.h>
 #include <wchar.h>
 
 #define NVAPI_ID_INITIALIZE 0x0150E828U

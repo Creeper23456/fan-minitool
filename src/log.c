@@ -2,6 +2,8 @@
 #include "log.h"
 
 #include <stdarg.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 static HANDLE g_log_file = INVALID_HANDLE_VALUE;
 static CRITICAL_SECTION g_log_lock;

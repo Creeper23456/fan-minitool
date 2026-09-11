@@ -8,6 +8,7 @@
 #include "nvapi.h"
 
 #include <math.h>
+#include <stdlib.h>
 #include <stdio.h>
 
 static SERVICE_STATUS_HANDLE g_status_handle = NULL;
